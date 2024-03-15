@@ -7,7 +7,7 @@
 }
 html,
 body {
-  font-family: "Noto Sans KR", "Inter", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 1rem;
   line-height: 1.2em;
   color: #111;
@@ -47,6 +47,7 @@ body {
   line-height: 1;
   box-sizing: border-box;
 }
+/* 헤더 */
 header {
   width: 100%;
   height: 80px;
@@ -65,7 +66,8 @@ h1 {
   width: 100px;
 }
 nav {
-  width: 300px;
+  width: 800px;
+  min-width: 500px;
 }
 nav > ul {
   width: 100%;
@@ -97,8 +99,154 @@ nav > ul {
   width: 100%;
 }
 .searchAll:hover {
-  border: 1px solid #aaa;
+  border: 1px solid #3d5ce9;
 }
 .searchAll:hover .searchBtn {
   opacity: 1;
+}
+/* 메인비주얼 */
+.mainVisual {
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  padding: 0 10.3125rem;
+  background-color: #fff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.visualImg {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+.visualImg > img {
+  max-width: 100%;
+}
+.mainTxt {
+  width: fit-content;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.mainTxt > h3 {
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+.mainTxt > h3 + div {
+  line-height: 1.4;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 40px;
+}
+.mainTxt .main_vBtn {
+  border: none;
+  background-color: #fff;
+  width: 300px;
+  height: 45px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+  border: 1px solid #111;
+  transition: all 0.3s;
+  text-align: center;
+  line-height: 42px;
+  cursor: pointer;
+}
+.mainTxt .main_vBtn:hover {
+  color: #fff;
+  background-color: #111;
+}
+.animationArea {
+  width: 970px;
+  height: 1000px;
+  position: absolute;
+  z-index: 1;
+  top: 30px;
+  left: 40%;
+  transform: rotate(0turn);
+  animation: circle 20s linear 0s infinite normal;
+}
+.dashLine {
+  box-sizing: border-box;
+  width: 970px;
+  height: 970px;
+  border: 2px dashed #111;
+  border-radius: 50%;
+  position: absolute;
+  top: 13px;
+  left: 0;
+}
+.circle1 {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #4b69fd;
+  top: 0;
+  left: 50%;
+  margin-left: -15px;
+  border: 2px solid #111;
+  border-radius: 100%;
+  box-sizing: border-box;
+}
+.circle2 {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #ff5613;
+  bottom: 0;
+  left: 50%;
+  margin-left: -15px;
+  border: 2px solid #111;
+  border-radius: 100%;
+  box-sizing: border-box;
+}
+@keyframes circle {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+/* 메인컨텐츠 */
+.mainContents {
+  width: 100%;
+  height: 292px;
+  background-color: #5f7bff;
+  padding: 50px 10.3125rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.mainContents > a {
+  display: block;
+  background-color: #fff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.mainContents > a:hover {
+  box-shadow: 0px 7px 20px rgb(39 42 116 / 80%);
+}
+.card {
+  box-sizing: border-box;
+  padding: 32px;
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+.card h3 {
+  font-size: 22px;
+  line-height: 1.2;
+}
+.card div:last-of-type {
+  font-size: 30px;
 }

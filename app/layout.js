@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { cardData } from "./data";
+import SearchBar from "./components/searchBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,6 +12,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  let data = cardData;
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -22,16 +25,16 @@ export default function RootLayout({ children }) {
             </h1>
             <nav>
               <ul>
-                <li>피드</li>
-                <li>전문검색</li>
+                {data.map((_, i) => {
+                  return (
+                    <li key={i}>
+                      <Link href={data[i].url}>{data[i].title}</Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
-            <div className="searchAll">
-              <button type="button" className="searchBtn">
-                <img src="/search.svg" alt="통합검색" />
-              </button>
-              <input type="text" placeholder="통합검색" />
-            </div>
+            <SearchBar />
           </div>
         </header>
         {children}
