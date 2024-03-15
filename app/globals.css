@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  font-family: "Noto Sans KR", "Inter", sans-serif;
+  font-size: 1rem;
+  line-height: 1.2em;
+  color: #111;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul,
+li {
+  list-style: none;
+  font-family: "Noto Sans KR", sans-serif;
+}
+table {
+  border-collapse: collapse;
+}
+input,
+select,
+textarea,
+button {
+  outline: none;
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+}
+button {
+  cursor: pointer;
+}
+img {
+  display: block;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Noto Sans KR", "Roboto" sans-serif;
+  font-size: 16px;
+  color: #111;
+  line-height: 1;
+  box-sizing: border-box;
+}
+header {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #eee;
+  padding: 0 10.3125rem;
+  background-color: #fff;
+}
+.con {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1 {
+  width: 100px;
+}
+nav {
+  width: 300px;
+}
+nav > ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: 600;
+}
+.searchAll {
+  width: 300px;
+  box-sizing: border-box;
+  padding: 4px 16px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  display: flex;
+  gap: 10px;
+  transition: border 0.3s;
+}
+.searchAll > .searchBtn {
+  background-color: transparent;
+  border: none;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.searchBtn > img {
+  max-width: 100%;
+}
+.searchAll > input {
+  border: none;
+  width: 100%;
+}
+.searchAll:hover {
+  border: 1px solid #aaa;
+}
+.searchAll:hover .searchBtn {
+  opacity: 1;
+}
