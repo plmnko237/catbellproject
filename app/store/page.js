@@ -1,7 +1,7 @@
 import Script from "next/script";
-import { Map } from "react-kakao-maps-sdk";
+import { Map, MapTypeControl, ZoomControl } from "react-kakao-maps-sdk";
 import { positionData } from "../data";
-import EventMarkerContainer from "../components/EventMarkerContainer";
+import EventMarkerContainer from "../components/eventMarkerContainer";
 
 export default async function Store() {
   const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_JAVASCRIPT_KYE}&autoload=false`;
@@ -16,9 +16,11 @@ export default async function Store() {
         <Script src={KAKAO_SDK_URL} strategy="beforeInteractive" />
         <Map
           center={{ lat: 37.396399, lng: 127.1032 }}
-          style={{ width: "100%", height: "50vh", borderRadius: "20px" }}
+          style={{ width: "100%", height: "70vh", borderRadius: "20px" }}
           level={3}
         >
+          <MapTypeControl position={"TOPRIGHT"} />
+          <ZoomControl position={"RIGHT"} />
           {positions.map((value) => (
             <EventMarkerContainer
               key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}

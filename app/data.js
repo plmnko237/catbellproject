@@ -1,4 +1,5 @@
-import curStateStation, { curStateInfo } from "@/util/curStateStation";
+import curStateStation, { currentInfo } from "@/util/curStateStation";
+import locationInfoUnit, { locationInfo } from "@/util/locationInfo";
 
 let cardData = [
   {
@@ -22,11 +23,10 @@ let cardData = [
 ];
 
 //영업소 위치 fetchData
-let station = await curStateInfo();
-//console.log("station", station);
+let station = await locationInfo();
 
 let positionData = station.map((a, i) => {
-  let [myPosition] = [
+  let [position] = [
     {
       title: station[i].unitName,
       latlng: {
@@ -36,7 +36,26 @@ let positionData = station.map((a, i) => {
     },
   ];
 
-  return myPosition;
+  return position;
 });
+
+//주유소 현황 fetchData
+//let gasStation = await currentInfo(1);
+
+// let gasStationData = gasStation.map((a, i) => {
+//   let [station] = [
+//     {
+//       direction: gasStation[i].direction, //방향
+//       routeName: gasStation[i].routeName, //노선명
+//       serviceAreaName: gasStation[i].serviceAreaName, //주유소명
+//       gasolinePrice: gasStation[i].gasolinePrice, //휘발유가격
+//       diselPrice: gasStation[i].diselPrice, //경유가격
+//       lpgPrice: gasStation[i].lpgPrice, //LPG가격
+//       telNo: gasStation[i].telNo, //전화번호
+//     },
+//   ];
+
+//   return station;
+// });
 
 export { cardData, positionData };

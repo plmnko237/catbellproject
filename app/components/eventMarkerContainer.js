@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { MapMarker, useMap } from "react-kakao-maps-sdk";
+import { styled } from "styled-components";
 
 export default function EventMarkerContainer({ position, content }) {
   const map = useMap();
@@ -13,7 +14,7 @@ export default function EventMarkerContainer({ position, content }) {
       onMouseOver={() => setIsVisible(true)}
       onMouseOut={() => setIsVisible(false)}
     >
-      {isVisible && <div>{content}</div>}
+      {isVisible && content}
     </MapMarker>
   );
 }
