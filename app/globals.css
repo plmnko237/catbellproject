@@ -266,10 +266,44 @@ nav > ul {
   color: #333;
   margin-bottom: 50px;
 }
-/* 주유소 현황 게시판 */
-.stationList {
+
+/* 주유소 현황 검색창 */
+.serachArea {
   width: 80%;
   margin: 0 auto;
+}
+.searchBar {
+  width: 50%;
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  margin: 0 auto;
+  transition: all 0.3s;
+}
+.searchBar input {
+  width: 100%;
+  font-size: 15px;
+  border: none;
+}
+.searchBar button {
+  border: none;
+  background-color: transparent;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+.searchBar:hover {
+  border: 1px solid #4b69fd;
+}
+.searchBar:hover button {
+  opacity: 1;
+}
+/* 주유소 현황 게시물 */
+.stationList {
+  width: 80%;
+  margin: 80px auto;
   height: 100vh;
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
@@ -287,4 +321,5 @@ nav > ul {
   width: 100%;
   border-bottom: 1px solid #ddd;
   text-align: center;
+  line-height: 48px;
 }

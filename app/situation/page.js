@@ -3,41 +3,85 @@ import { useEffect, useState } from "react";
 
 export default function Situation() {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [searchWord, setSearchWord] = useState("");
 
   useEffect(() => {
-    const fetchData = async (page = 1) => {
+    const fetchData = async (size) => {
       try {
-        const apiKey = process.env.MY_OPEN_API_SECRET_KYE;
         const response = await fetch(
-          `https://data.ex.co.kr/openapi/business/curStateStation?key=${process.env.MY_OPEN_API_SECRET_KYE}&type=json&numOfRows=20&pageNo=${page}`
+          `https://data.ex.co.kr/openapi/business/curStateStation?key=7711838617&type=json&numOfRows=${size}&pageNo=${page}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const result = await response.json();
-        setData(result.list || []);
+        setData((prevData) => [...prevData, ...(result.list || [])]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchData();
-  }, []);
+    //무한 스크롤
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        fetchData(20); // 20씩 추가로 데이터 가져오기
+        setPage((prevPage) => prevPage + 1); // 페이지 번호 증가
+      }
+    };
 
-  console.log("데이터", data);
+    fetchData(20); //기본 목록 20개 가져오기
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [page]);
+
+  //엔터 눌렀을때 검색
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleSearch = () => {
+    //주유소 이름 검색
+    if (searchWord) {
+      //검색어가 있으면 실행
+      const filteredData = data.map((station) => {
+        const findStation = station.filter((a) =>
+          a.serviceAreaName.includes(searchWord)
+        );
+      });
+    } else {
+      alert("검색어를 입력해주세요.");
+    }
+  };
 
   return (
     <>
       <section className="subTitle">
         <h2>주유소 현황</h2>
-        <span></span>
       </section>
       <div className="container">
-        <div className="serachBar">
-          <input type="text" />
-          <button type="button"> 검색하기</button>
+        <div className="serachArea">
+          <div className="searchBar">
+            <input
+              type="text"
+              placeholder="검색어를 입력해주세요."
+              value={searchWord}
+              onChange={(e) => setSearchWord(e.target.value)}
+              onKeyDown={handleKeyPress}
+            />
+            <button type="button" className="searchBtn">
+              <img src="/search.svg" alt="검색" onClick={handleSearch} />
+            </button>
+          </div>
         </div>
-
         <table className="stationList">
           <thead>
             <tr>
