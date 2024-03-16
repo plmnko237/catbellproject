@@ -1,3 +1,5 @@
+import curStateStation, { curStateInfo } from "@/util/curStateStation";
+
 let cardData = [
   {
     title: "영업점 찾기",
@@ -19,4 +21,22 @@ let cardData = [
   },
 ];
 
-export { cardData };
+//영업소 위치 fetchData
+let station = await curStateInfo();
+//console.log("station", station);
+
+let positionData = station.map((a, i) => {
+  let [myPosition] = [
+    {
+      title: station[i].unitName,
+      latlng: {
+        lat: Number(station[i].yValue),
+        lng: Number(station[i].xValue),
+      },
+    },
+  ];
+
+  return myPosition;
+});
+
+export { cardData, positionData };
