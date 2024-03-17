@@ -325,6 +325,39 @@ nav > ul {
 }
 
 /* 교통 차트 */
+.tabBox {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.tabBox > div {
+  width: 50%;
+  height: 100%;
+  border: 1px solid #ddd;
+  line-height: 50px;
+  cursor: pointer;
+  border-radius: 20px 20px 0 0;
+}
+.active {
+  background-color: #fff;
+  font-weight: 700;
+}
+.inactive {
+  background-color: #eee;
+  color: #ccc;
+}
+.chartBox {
+  width: 100%;
+  height: fit-content;
+  border: 1px solid #ddd;
+  border-top: none;
+  box-sizing: border-box;
+  padding: 80px 40px;
+  margin-bottom: 100px;
+}
 .dateBox {
   width: 100%;
   background-color: #fff;
@@ -335,7 +368,6 @@ nav > ul {
   display: flex;
   box-sizing: border-box;
 }
-
 .dateBox > div {
   text-align: center;
   width: 25%;
@@ -353,10 +385,39 @@ nav > ul {
 .icon {
   font-size: 20px;
 }
+.carDirBtn {
+  width: 50%;
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+.carDirBtn > div {
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.active1 {
+  border: 1px solid rgb(61, 92, 233);
+  background-color: rgba(61, 92, 233, 0.2);
+  color: #3d5ce9;
+  font-weight: 500;
+}
+.inactive1 {
+  border: 1px solid rgb(209, 209, 209);
+  background-color: rgba(209, 209, 209, 0.2);
+  color: #bbb;
+}
 .chartArea {
   width: 100%;
   position: relative;
   height: fit-content;
+}
+.chartArea > h3 {
+  margin-bottom: 40px;
+  text-align: center;
 }
 .chartArea > canvas {
   width: 100%;

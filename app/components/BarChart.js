@@ -5,19 +5,41 @@ import "chartjs-adapter-date-fns";
 
 export default function BarChart({ traffic }) {
   const chartRef = useRef(null);
-  let title = traffic
-    .map((a, i) => a.title)
-    .slice(5, 22)
-    .map((segment) => segment.split("->").join(" ⇒ "));
-  let content = traffic
-    .map((a, i) => a.content)
-    .slice(5, 22)
-    .map((time) => {
-      let [hour, minute] = time.split(":").map(Number);
-      return hour * 60 + minute; // 소요 시간을 분 단위로 변환하여 Chart.js에 맞게 가공
-    });
-  console.log(content);
-  console.log(title);
+
+  let myFilter = filterDir();
+
+  function filterDir(start = 5, end = 21) {
+    //구간이름
+    let title = traffic
+      .map((a, i) => a.title)
+      .slice(start, end)
+      .map((segment) => segment.split("->").join(" ⇒ "));
+    //소요시간
+    let content = traffic
+      .map((a, i) => a.content)
+      .slice(start, end)
+      .map((time) => {
+        let [hour, minute] = time.split(":").map(Number);
+        return hour * 60 + minute;
+      });
+
+    return { title, content };
+  }
+
+  const updateChart = (filteredData) => {
+    const { title, content } = filteredData;
+
+    if (chartRef.current) {
+      const chart = chartRef.current.chart;
+
+      // 차트 데이터 업데이트
+      chart.data.labels = title;
+      chart.data.datasets[0].data = content;
+
+      // 차트 업데이트
+      chart.update();
+    }
+  };
 
   useEffect(() => {
     if (chartRef.current) {
@@ -30,12 +52,12 @@ export default function BarChart({ traffic }) {
       const newChart = new Chart(context, {
         type: "bar",
         data: {
-          labels: title,
+          labels: myFilter.title,
           datasets: [
             {
               axis: "y",
               label: "구간 별 소요 시간(분 단위)",
-              data: content,
+              data: myFilter.content,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(255, 159, 64, 0.2)",
@@ -82,7 +104,46 @@ export default function BarChart({ traffic }) {
   }, []);
   return (
     <div className="chartArea">
-      <h3>자동차 구간 별 소요시간</h3>
+      <h3>자동차 고속도로 구간 별 소요시간</h3>
+      <div className="carDirBtn">
+        {["전체", "서울 ⇒ 지방방향", "지방 ⇒ 서울방향", "지방 ⇒ 지방방향"].map(
+          (a, index) => {
+            return (
+              <div
+                className={index === 0 ? "active1" : "inactive1"}
+                onClick={(e) => {
+                  const parentElement = e.target.parentElement;
+
+                  Array.from(parentElement.children).forEach((child) => {
+                    if (child === e.target) {
+                      child.className = "active1";
+                    } else {
+                      child.className = "inactive1";
+                    }
+                  });
+
+                  console.log(e.target);
+                  if (a == "전체") {
+                    const filteredData = filterDir();
+                    updateChart(filteredData);
+                  } else if (a == "서울 ⇒ 지방방향") {
+                    const filteredData = filterDir(5, 12);
+                    updateChart(filteredData);
+                  } else if (a == "지방 ⇒ 서울방향") {
+                    const filteredData = filterDir(12, 19);
+                    updateChart(filteredData);
+                  } else {
+                    const filteredData = filterDir(19);
+                    updateChart(filteredData);
+                  }
+                }}
+              >
+                {a}
+              </div>
+            );
+          }
+        )}
+      </div>
       <canvas ref={chartRef} />
     </div>
   );

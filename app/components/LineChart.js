@@ -5,19 +5,21 @@ import "chartjs-adapter-date-fns";
 
 export default function BarChart({ traffic }) {
   const chartRef = useRef(null);
+
+  //구간이름
   let title = traffic
     .map((a, i) => a.title)
-    .slice(5, 22)
+    .slice(21)
     .map((segment) => segment.split("->").join(" ⇒ "));
+
+  //소요시간
   let content = traffic
     .map((a, i) => a.content)
-    .slice(5, 22)
+    .slice(21)
     .map((time) => {
       let [hour, minute] = time.split(":").map(Number);
       return hour * 60 + minute; // 소요 시간을 분 단위로 변환하여 Chart.js에 맞게 가공
     });
-  console.log(content);
-  console.log(title);
 
   useEffect(() => {
     if (chartRef.current) {
@@ -82,7 +84,13 @@ export default function BarChart({ traffic }) {
   }, []);
   return (
     <div className="chartArea">
-      <h3>자동차 구간 별 소요시간</h3>
+      <h3>버스 고속도로 구간 별 소요시간</h3>
+      <div className="carDirBtn">
+        <div className="active1">전체</div>
+        <div className="inactive1">서울 ⇒ 지방방향</div>
+        <div className="inactive1">지방 ⇒ 서울방향</div>
+        <div className="inactive1">지방 ⇒ 지방방향</div>
+      </div>
       <canvas ref={chartRef} />
     </div>
   );

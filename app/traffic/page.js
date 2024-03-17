@@ -1,4 +1,4 @@
-import BarChart from "../components/BarChart";
+import CarTab from "../components/CarTab";
 import { today, trafficData } from "../data";
 
 export default async function Traffic() {
@@ -39,7 +39,7 @@ export default async function Traffic() {
             </h4>
           </div>
         </div>
-        <BarChart traffic={data} />
+        <CarTab traffic={data} />
       </div>
     </>
   );
