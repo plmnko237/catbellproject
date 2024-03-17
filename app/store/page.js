@@ -1,7 +1,7 @@
 import Script from "next/script";
 import { Map, MapTypeControl, ZoomControl } from "react-kakao-maps-sdk";
 import { positionData } from "../data";
-import EventMarkerContainer from "../components/eventMarkerContainer";
+import EventMarkerContainer from "../components/EventMarkerContainer";
 
 export default async function Store() {
   const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_JAVASCRIPT_KYE}&autoload=false`;

@@ -10,7 +10,7 @@ export default function Situation() {
     const fetchData = async (size) => {
       try {
         const response = await fetch(
-          `https://data.ex.co.kr/openapi/business/curStateStation?key=7711838617&type=json&numOfRows=${size}&pageNo=${page}`
+          `https://data.ex.co.kr/openapi/business/curStateStation?key=7711838617&type=json&numOfRows=${size}&pageNo=${page}&serviceAreaName=${searchWord}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -39,7 +39,7 @@ export default function Situation() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [page]);
+  }, [page, searchWord]);
 
   //엔터 눌렀을때 검색
   const handleKeyPress = (event) => {
@@ -47,21 +47,14 @@ export default function Situation() {
       handleSearch();
     }
   };
-
   const handleSearch = () => {
-    //주유소 이름 검색
     if (searchWord) {
-      //검색어가 있으면 실행
-      const filteredData = data.map((station) => {
-        const findStation = station.filter((a) =>
-          a.serviceAreaName.includes(searchWord)
-        );
-      });
+      setData([]); // 검색 결과를 보여주기 전에 이전 데이터 초기화
+      setPage(1); // 검색 시 페이지 번호 초기화
     } else {
       alert("검색어를 입력해주세요.");
     }
   };
-
   return (
     <>
       <section className="subTitle">
@@ -72,7 +65,7 @@ export default function Situation() {
           <div className="searchBar">
             <input
               type="text"
-              placeholder="검색어를 입력해주세요."
+              placeholder="주유소를 검색해주세요."
               value={searchWord}
               onChange={(e) => setSearchWord(e.target.value)}
               onKeyDown={handleKeyPress}

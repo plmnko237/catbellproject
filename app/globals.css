@@ -323,3 +323,42 @@ nav > ul {
   text-align: center;
   line-height: 48px;
 }
+
+/* 교통 차트 */
+.dateBox {
+  width: 100%;
+  background-color: #fff;
+  padding: 40px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  margin-bottom: 80px;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.dateBox > div {
+  text-align: center;
+  width: 25%;
+  border-right: 1px solid #ddd;
+}
+.dateBox > div:last-child {
+  border-right: none;
+}
+.dateBox > div > h4 {
+  color: #333;
+}
+.dateBox > div > h4 > span {
+  color: #3d5ce9;
+}
+.icon {
+  font-size: 20px;
+}
+.chartArea {
+  width: 100%;
+  position: relative;
+  height: fit-content;
+}
+.chartArea > canvas {
+  width: 100%;
+  height: auto;
+}
