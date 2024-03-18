@@ -72,10 +72,15 @@ h1 > a {
 h1 > a > img {
   max-width: 100%;
 }
-
+.mobileGnb {
+  display: none;
+}
 #gnb {
   width: 800px;
   min-width: 500px;
+}
+.mobile_mBtn {
+  display: none;
 }
 #gnb > ul {
   width: 100%;
@@ -589,6 +594,67 @@ h1 > a > img {
   }
   h1 {
     width: 120px;
+  }
+  .mobileGnb {
+    width: 0;
+    transition: width 0.3s;
+    box-sizing: border-box;
+    padding-left: 20px;
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    overflow: hidden;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    height: 100vh;
+  }
+  #m_gnb {
+    width: 100%;
+    background-color: #fff;
+    padding: 40px;
+    box-sizing: border-box;
+    border-left: 5px solid #111;
+    border-bottom: 5px solid #111;
+    border-radius: 0 0 0 40px;
+  }
+  .close {
+    margin-top: 16px;
+    width: 55px;
+    height: 48px;
+    background-color: #111;
+    font-size: 31px;
+    color: #fff;
+    line-height: 48px;
+    text-align: center;
+  }
+  .mobile_mBtn {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    display: block;
+    font-size: 31px;
+    background-color: #3d5ce9;
+    color: #111;
+    transition: all 0.3s;
+  }
+  .mobile_mBtn:hover {
+    background-color: #111;
+    color: #fff;
+  }
+  #m_gnb > ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 50px;
+  }
+  #m_gnb > ul > li {
+    font-size: 25px;
+    padding-bottom: 24px;
+    padding-left: 10px;
+    border-bottom: 1px solid #eee;
   }
   #gnb {
     display: none;
