@@ -1,9 +1,8 @@
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Link from "next/link";
 import { cardData } from "./data";
-import SearchBar from "./components/searchBar";
+import SearchBar from "./components/SearchBar";
 
 const inter = Inter({ subsets: ["latin"] });
 

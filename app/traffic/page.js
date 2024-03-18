@@ -1,12 +1,9 @@
+import { forecastInfo } from "@/util/forecast";
 import CarTab from "../components/CarTab";
-import { today, trafficData } from "../data";
+import { trafficAttributes } from "../data";
 
 export default async function Traffic() {
-  const data = trafficData;
-  let nowDate = today;
-  let cjunkook = Number(data[2].content).toLocaleString("ko-KR");
-  let cjibangDir = Number(data[3].content).toLocaleString("ko-KR");
-  let cseoulDir = Number(data[4].content).toLocaleString("ko-KR");
+  let appKey = process.env.MY_OPEN_API_SECRET_KYE;
 
   return (
     <>
@@ -14,32 +11,7 @@ export default async function Traffic() {
         <h2>실시간 교통 예보 현황</h2>
       </section>
       <div className="container" style={{ marginBottom: "100px" }}>
-        <div className="dateBox">
-          <div>
-            <h4>
-              📅 날짜 : <span>{nowDate}</span>
-            </h4>
-          </div>
-          <div>
-            <h4>
-              <span className="icon">🚙</span> 전국 교통량 :{" "}
-              <span>{cjunkook}대</span>
-            </h4>
-          </div>
-          <div>
-            <h4>
-              <span className="icon">🚗</span> 지방방향 교통량 :{" "}
-              <span>{cjibangDir}대</span>
-            </h4>
-          </div>
-          <div>
-            <h4>
-              <span className="icon">🚐</span> 서울방향 교통량:{" "}
-              <span>{cseoulDir}대</span>
-            </h4>
-          </div>
-        </div>
-        <CarTab traffic={data} />
+        <CarTab appkey={appKey} trafficAttributes={trafficAttributes} />
       </div>
     </>
   );

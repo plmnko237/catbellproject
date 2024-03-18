@@ -110,6 +110,7 @@ export default function BarChart({ traffic }) {
           (a, index) => {
             return (
               <div
+                key={index}
                 className={index === 0 ? "active1" : "inactive1"}
                 onClick={(e) => {
                   const parentElement = e.target.parentElement;

@@ -1,7 +1,6 @@
 import locationInfoUnit, { locationInfo } from "@/util/locationInfo";
-import forecast, { forecastInfo } from "@/util/forecast";
 
-let cardData = [
+export const cardData = [
   {
     title: "영업점 찾기",
     contents: "지도를 통해 주변의 가까운 주유소 정보를 알려드려요.",
@@ -25,7 +24,7 @@ let cardData = [
 //영업소 위치 fetchData
 let station = await locationInfo();
 
-let positionData = station.map((a, i) => {
+export const positionData = station.map((a, i) => {
   let [position] = [
     {
       title: station[i].unitName,
@@ -39,22 +38,10 @@ let positionData = station.map((a, i) => {
   return position;
 });
 
-//실시간 교통 fetchData
-let traffic = await forecastInfo();
-
-//오늘 날짜
-let today = traffic[0].sdate;
-today =
-  today.slice(0, 4) +
-  "년" +
-  today.slice(4, 6) +
-  "월" +
-  today.slice(6, 8) +
-  "일";
-
-let trafficAttributes = [
-  "날짜",
+//필터링할 내용
+export const trafficAttributes = [
   "시간",
+  "날짜",
   "전국교통량",
   "지방방향 교통량",
   "서울방향 교통량",
@@ -91,9 +78,3 @@ let trafficAttributes = [
   "강릉->서울 버스 소요시간",
   "양양->남양주 버스 소요시간",
 ];
-
-let trafficData = trafficAttributes.map((attr, i) => {
-  return { title: attr, content: traffic[0][Object.keys(traffic[0])[i]] };
-});
-
-export { cardData, positionData, today, trafficData };
