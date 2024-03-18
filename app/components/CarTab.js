@@ -53,27 +53,26 @@ export default function CarTab({ appKey, trafficAttributes }) {
     <>
       <div className="dateBox">
         <div>
-          <h4>
-            📅 기준 날짜 : <span>{today}</span>
-          </h4>
+          <h4>📅 날짜 :</h4>
+          <span>{today}</span>
         </div>
         <div>
           <h4>
             <span className="icon">🚙</span> 전국 교통량 :{" "}
-            <span>{cjunkook}대</span>
           </h4>
+          <span>{cjunkook}대</span>
         </div>
         <div>
           <h4>
             <span className="icon">🚗</span> 지방방향 교통량 :{" "}
-            <span>{cjibangDir}대</span>
           </h4>
+          <span>{cjibangDir}대</span>
         </div>
         <div>
           <h4>
             <span className="icon">🚐</span> 서울방향 교통량:{" "}
-            <span>{cseoulDir}대</span>
-          </h4>
+          </h4>{" "}
+          <span>{cseoulDir}대</span>
         </div>
       </div>
       <div className="tabBox">

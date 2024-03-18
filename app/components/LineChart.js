@@ -118,7 +118,6 @@ export default function BarChart({ traffic }) {
                   }
                 });
 
-                console.log(e.target);
                 if (a == "전체") {
                   const filteredData = filterDir();
                   updateChart(filteredData);

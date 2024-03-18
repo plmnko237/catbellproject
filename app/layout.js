@@ -3,6 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import { cardData } from "./data";
 import SearchBar from "./components/SearchBar";
+import MobileMenu from "./components/MobileMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <MobileMenu />
         <header>
           <div className="con">
             <h1>
@@ -23,7 +25,7 @@ export default function RootLayout({ children }) {
                 <img src="/logo.svg" alt="logo" />
               </Link>
             </h1>
-            <nav>
+            <nav id="gnb">
               <ul>
                 {data.map((_, i) => {
                   return (

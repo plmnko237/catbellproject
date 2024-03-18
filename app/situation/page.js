@@ -52,13 +52,13 @@ export default function Situation() {
     if (searchWord) {
       setPage(1);
 
-      // 기존 데이터에서 해당 검색어가 포함된 아이템만 필터링
-      const filtered = data.filter((item) => console.log(item));
+      const filtered = data.filter((item) => item == searchWord);
 
       // 필터된 결과로 데이터 업데이트
       setData(filtered);
     } else {
       alert("검색어를 입력해주세요.");
+      setData([]);
     }
   };
   return (
@@ -81,34 +81,37 @@ export default function Situation() {
             </button>
           </div>
         </div>
-        <table className="stationList">
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>주유소명</th>
-              <th>방향</th>
-              <th>노선명</th>
-              <th>휘발유</th>
-              <th>경유</th>
-              <th>LPG</th>
-              <th>전화번호</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((station, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{station.serviceAreaName || "알 수 없음"}</td>
-                <td>{station.direction || "알 수 없음"}</td>
-                <td>{station.routeName || "알 수 없음"}</td>
-                <td>{station.gasolinePrice || "알 수 없음"}</td>
-                <td>{station.diselPrice || "알 수 없음"}</td>
-                <td>{station.lpgPrice || "알 수 없음"}</td>
-                <td>{station.telNo || "알 수 없음"}</td>
+        <div className="message">↔ 좌우로 스크롤해보세요.</div>
+        <div style={{ overflow: "hidden", overflowX: "scroll" }}>
+          <table className="stationList">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>주유소명</th>
+                <th>방향</th>
+                <th>노선명</th>
+                <th>휘발유</th>
+                <th>경유</th>
+                <th>LPG</th>
+                <th>전화번호</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.map((station, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{station.serviceAreaName || "알 수 없음"}</td>
+                  <td>{station.direction || "알 수 없음"}</td>
+                  <td>{station.routeName || "알 수 없음"}</td>
+                  <td>{station.gasolinePrice || "알 수 없음"}</td>
+                  <td>{station.diselPrice || "알 수 없음"}</td>
+                  <td>{station.lpgPrice || "알 수 없음"}</td>
+                  <td>{station.telNo || "알 수 없음"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

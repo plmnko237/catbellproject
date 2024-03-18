@@ -77,7 +77,7 @@ export default function BarChart({ traffic }) {
           ],
         },
         options: {
-          //responsive: true,
+          responsive: true,
           animations: {
             tension: {
               duration: 1000,
@@ -119,7 +119,6 @@ export default function BarChart({ traffic }) {
                     }
                   });
 
-                  console.log(e.target);
                   if (a == "전체") {
                     const filteredData = filterDir();
                     updateChart(filteredData);

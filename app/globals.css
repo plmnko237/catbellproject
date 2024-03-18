@@ -63,13 +63,21 @@ header {
   align-items: center;
 }
 h1 {
-  width: 100px;
+  width: 170px;
+  height: fit-content;
 }
-nav {
+h1 > a {
+  display: block;
+}
+h1 > a > img {
+  max-width: 100%;
+}
+
+#gnb {
   width: 800px;
   min-width: 500px;
 }
-nav > ul {
+#gnb > ul {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -124,12 +132,14 @@ nav > ul {
   z-index: 2;
 }
 .visualImg > img {
-  max-width: 100%;
+  width: fit-content;
+  max-width: 70%;
 }
 .mainTxt {
   width: fit-content;
   font-family: "Noto Sans KR", sans-serif;
 }
+
 .mainTxt > h3 {
   line-height: 1.5;
   margin-bottom: 20px;
@@ -140,6 +150,9 @@ nav > ul {
   font-size: 18px;
   color: #333;
   margin-bottom: 40px;
+}
+.mainTxt > a {
+  display: block;
 }
 .mainTxt .main_vBtn {
   border: none;
@@ -301,6 +314,9 @@ nav > ul {
   opacity: 1;
 }
 /* 주유소 현황 게시물 */
+.message {
+  display: none;
+}
 .stationList {
   width: 80%;
   margin: 0 auto;
@@ -370,7 +386,10 @@ nav > ul {
   box-sizing: border-box;
 }
 .dateBox > div {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   width: 25%;
   border-right: 1px solid #ddd;
 }
@@ -380,7 +399,9 @@ nav > ul {
 .dateBox > div > h4 {
   color: #333;
 }
-.dateBox > div > h4 > span {
+.dateBox span {
+  line-height: 1;
+  font-weight: 700;
   color: #3d5ce9;
 }
 .icon {
@@ -437,4 +458,236 @@ nav > ul {
 .chartArea > canvas {
   width: 100%;
   height: auto;
+}
+
+/* 반응형 */
+
+/* PC */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+  header {
+    padding: 0 6vw;
+  }
+  #gnb {
+    width: fit-content;
+  }
+  .mainVisual {
+    padding: 0 6vw;
+  }
+  .visualImg > img {
+    max-width: 100%;
+    padding-top: 3vh;
+  }
+  .searchAll {
+    width: 170px;
+  }
+  .mainContents {
+    padding: 50px 6vw;
+    height: fit-content;
+  }
+  /* 영업점 찾기 */
+  .container {
+    padding: 0 6vw;
+    margin-bottom: 50px;
+  }
+  /* 주유소 현황 */
+  .stationList {
+    width: 100%;
+  }
+  /* 실시간 교통 */
+  .carDirBtn,
+  .carDirBtn2 {
+    width: 85%;
+  }
+  .dateBox > div {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+/* 태블릿 */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  header {
+    padding: 0 6vw;
+  }
+  h1 {
+    width: 140px;
+  }
+  #gnb {
+    width: fit-content;
+    min-width: auto;
+  }
+  #gnb > ul {
+    gap: 20px;
+  }
+  .searchAll {
+    width: 150px;
+  }
+  .mainVisual {
+    padding: 0 6vw;
+  }
+  .mainTxt {
+    width: 40%;
+  }
+  .mainTxt .main_vBtn {
+    width: 80%;
+  }
+  .mainContents {
+    padding: 50px 6vw;
+    height: fit-content;
+  }
+  .visualImg > img {
+    max-width: 150%;
+  }
+  /* 영업점 찾기 */
+  .container {
+    padding: 0 6vw;
+    margin-bottom: 50px;
+  }
+  /* 주유소 현황 */
+  .stationList {
+    width: 100%;
+  }
+  /* 실시간 교통 */
+
+  .carDirBtn,
+  .carDirBtn2 {
+    width: 85%;
+  }
+  .dateBox {
+    flex-wrap: wrap;
+  }
+  .dateBox > div {
+    width: 50%;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .dateBox > div:nth-child(even) {
+    border-right: none;
+  }
+  .dateBox > div:nth-child(1) {
+    padding-bottom: 20px;
+  }
+  .dateBox > div:nth-child(2) {
+    padding-bottom: 20px;
+  }
+  .dateBox > div:nth-child(3) {
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+  }
+  .dateBox > div:nth-child(4) {
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+  }
+  .carDirBtn {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+/* 모바일 */
+@media screen and (min-width: 562px) and (max-width: 767px) {
+  header {
+    padding: 0 6vw;
+  }
+  h1 {
+    width: 120px;
+  }
+  #gnb {
+    display: none;
+  }
+  .searchAll {
+    display: none;
+  }
+  .mainVisual {
+    padding: 0 6vw;
+    justify-content: center;
+  }
+  .mainTxt {
+    text-align: center;
+    width: 72%;
+    z-index: 5;
+  }
+  .mainTxt > a {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .mainTxt .main_vBtn {
+    width: 100%;
+  }
+  .mainContents {
+    padding: 50px 6vw;
+    height: fit-content;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .animationArea {
+    opacity: 0.3;
+  }
+  .visualImg {
+    display: none;
+  }
+  /* 영업점 찾기 */
+  .container {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0 6vw;
+    margin-bottom: 50px;
+  }
+  /* 주유소 현황 */
+  .stationList {
+    margin-top: 20px;
+    overflow-x: scroll;
+    width: 1000px;
+  }
+  .message {
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3d5ce9;
+    display: block;
+  }
+  .searchBar {
+    width: 100%;
+  }
+  /* 실시간 교통 */
+  .carDirBtn,
+  .carDirBtn2 {
+    width: 85%;
+  }
+  .dateBox {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+  }
+  .dateBox > div {
+    width: 100%;
+    flex-direction: column;
+    padding-top: 20px;
+  }
+  .dateBox > div {
+    border: none;
+    border-top: 1px solid #eee;
+  }
+  .dateBox > div:first-child {
+    border: none;
+    padding-top: 0;
+  }
+  .chartBox {
+    margin-bottom: 0;
+  }
+  .chartArea > h3 {
+    padding: 0 58px;
+    line-height: 1.8rem;
+  }
+  .carDirBtn {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+  .carDirBtn2 {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+
+  .chartBox {
+    padding: 50px 0;
+  }
 }

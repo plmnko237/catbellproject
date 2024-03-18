@@ -8,7 +8,7 @@ export const locationInfo = async () => {
 
     if (response.status === 200) {
       const result = await response.json();
-      //console.log("Fetched data:", result.list);
+
       locationInfoUnit = result.list; // locationInfoUnit 데이터를 할당
       return locationInfoUnit;
     } else {

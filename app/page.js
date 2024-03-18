@@ -24,7 +24,7 @@ export default function Home() {
           <div className="circle2"></div>
         </div>
         <div className="visualImg">
-          <img src="/main_visual.png" alt="메인이미지" />
+          <img src="/main_visual.svg" alt="메인이미지" />
         </div>
       </section>
       <section className="mainContents">
