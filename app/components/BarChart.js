@@ -5,25 +5,23 @@ import "chartjs-adapter-date-fns";
 
 export default function BarChart({ traffic }) {
   const chartRef = useRef(null);
-
   let myFilter = filterDir();
 
   function filterDir(start = 5, end = 21) {
-    //구간이름
-    let title = traffic
-      .map((a, i) => a.title)
-      .slice(start, end)
-      .map((segment) => segment.split("->").join(" ⇒ "));
-    //소요시간
-    let content = traffic
-      .map((a, i) => a.content)
-      .slice(start, end)
-      .map((time) => {
-        let [hour, minute] = time.split(":").map(Number);
-        return hour * 60 + minute;
-      });
+    const flattened = [].concat(...traffic);
+    const titles = flattened.map((item) => item.title);
+    const contents = flattened.map((item) => item.content);
 
-    return { title, content };
+    const slicedTitles = titles.slice(start, end);
+    const slicedContents = contents.slice(start, end).map((time) => {
+      let [hour, minute] = time.split(":").map(Number);
+      return hour * 60 + minute;
+    });
+
+    return {
+      title: slicedTitles,
+      content: slicedContents,
+    };
   }
 
   const updateChart = (filteredData) => {
@@ -32,11 +30,9 @@ export default function BarChart({ traffic }) {
     if (chartRef.current) {
       const chart = chartRef.current.chart;
 
-      // 차트 데이터 업데이트
       chart.data.labels = title;
       chart.data.datasets[0].data = content;
 
-      // 차트 업데이트
       chart.update();
     }
   };

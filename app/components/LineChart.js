@@ -5,21 +5,37 @@ import "chartjs-adapter-date-fns";
 
 export default function BarChart({ traffic }) {
   const chartRef = useRef(null);
+  let myFilter = filterDir();
 
-  //구간이름
-  let title = traffic
-    .map((a, i) => a.title)
-    .slice(21)
-    .map((segment) => segment.split("->").join(" ⇒ "));
+  function filterDir(start = 21, end = -1) {
+    const flattened = [].concat(...traffic);
+    const titles = flattened.map((item) => item.title);
+    const contents = flattened.map((item) => item.content);
 
-  //소요시간
-  let content = traffic
-    .map((a, i) => a.content)
-    .slice(21)
-    .map((time) => {
+    const slicedTitles = titles.slice(start, end);
+    const slicedContents = contents.slice(start, end).map((time) => {
       let [hour, minute] = time.split(":").map(Number);
-      return hour * 60 + minute; // 소요 시간을 분 단위로 변환하여 Chart.js에 맞게 가공
+      return hour * 60 + minute;
     });
+
+    return {
+      title: slicedTitles,
+      content: slicedContents,
+    };
+  }
+
+  const updateChart = (filteredData) => {
+    const { title, content } = filteredData;
+
+    if (chartRef.current) {
+      const chart = chartRef.current.chart;
+
+      chart.data.labels = title;
+      chart.data.datasets[0].data = content;
+
+      chart.update();
+    }
+  };
 
   useEffect(() => {
     if (chartRef.current) {
@@ -32,12 +48,12 @@ export default function BarChart({ traffic }) {
       const newChart = new Chart(context, {
         type: "bar",
         data: {
-          labels: title,
+          labels: myFilter.title,
           datasets: [
             {
               axis: "y",
               label: "구간 별 소요 시간(분 단위)",
-              data: content,
+              data: myFilter.content,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(255, 159, 64, 0.2)",
@@ -85,11 +101,40 @@ export default function BarChart({ traffic }) {
   return (
     <div className="chartArea">
       <h3>버스 고속도로 구간 별 소요시간</h3>
-      <div className="carDirBtn">
-        <div className="active1">전체</div>
-        <div className="inactive1">서울 ⇒ 지방방향</div>
-        <div className="inactive1">지방 ⇒ 서울방향</div>
-        <div className="inactive1">지방 ⇒ 지방방향</div>
+      <div className="carDirBtn2">
+        {["전체", "서울 ⇒ 지방방향", "지방 ⇒ 지방방향"].map((a, index) => {
+          return (
+            <div
+              key={index}
+              className={index === 0 ? "active1" : "inactive1"}
+              onClick={(e) => {
+                const parentElement = e.target.parentElement;
+
+                Array.from(parentElement.children).forEach((child) => {
+                  if (child === e.target) {
+                    child.className = "active1";
+                  } else {
+                    child.className = "inactive1";
+                  }
+                });
+
+                console.log(e.target);
+                if (a == "전체") {
+                  const filteredData = filterDir();
+                  updateChart(filteredData);
+                } else if (a == "서울 ⇒ 지방방향") {
+                  const filteredData = filterDir(21, 28);
+                  updateChart(filteredData);
+                } else {
+                  const filteredData = filterDir(28);
+                  updateChart(filteredData);
+                }
+              }}
+            >
+              {a}
+            </div>
+          );
+        })}
       </div>
       <canvas ref={chartRef} />
     </div>
