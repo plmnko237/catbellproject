@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import EventMarkerContainer from "../components/EventMarkerContainer";
 import { positionData } from "../data";
 
