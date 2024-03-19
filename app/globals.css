@@ -629,15 +629,15 @@ h1 > a > img {
     text-align: center;
   }
   .mobile_mBtn {
-    width: 48px;
-    height: 48px;
     text-align: center;
     line-height: 48px;
+    padding: 0 14px;
     display: block;
     font-size: 31px;
     background-color: #3d5ce9;
     color: #111;
     transition: all 0.3s;
+    cursor: pointer;
   }
   .mobile_mBtn:hover {
     background-color: #111;
