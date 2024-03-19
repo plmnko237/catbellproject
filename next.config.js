@@ -1,5 +1,4 @@
-const nextConfig = {
-  reactStrictMode: false,
+module.exports = {
   async headers() {
     return [
       {
@@ -21,16 +20,4 @@ const nextConfig = {
       },
     ];
   },
-
-  // webpack(config, options) {
-  //   config.module.rules.push({
-  //     test: /\.svg$/,
-  //     issuer: { and: [/\.(js)x?$/] },
-  //     use: ["@svgr/webpack"],
-  //   });
-
-  //   return config;
-  // },
 };
-
-module.exports = nextConfig;
