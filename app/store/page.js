@@ -1,9 +1,8 @@
-"use client";
 export const dynamic = "force-dynamic";
 import EventMarkerContainer from "../components/EventMarkerContainer";
 import { positionData } from "../data";
 
-export default async function Store() {
+export default function Store() {
   const kye = process.env.KAKAO_JAVASCRIPT_KYE;
   return (
     <>
