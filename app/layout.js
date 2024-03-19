@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <Html lang="en">
       <Head />
       <body className={inter.className}>
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               var script = document.createElement('script');
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
               document.body.appendChild(script);
             `,
           }}
-        />
+        /> */}
         <header>
           <div className="con">
             <h1>
