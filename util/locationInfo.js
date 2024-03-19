@@ -3,7 +3,7 @@ let locationInfoUnit;
 export const locationInfo = async () => {
   try {
     const response = await fetch(
-      `https://data.ex.co.kr/openapi/locationinfo/locationinfoUnit?key=${process.env.MY_OPEN_API_SECRET_KYE}&type=json&numOfRows=10&pageNo=1`
+      `https://data.ex.co.kr/openapi/locationinfo/locationinfoUnit?key=${process.env.MY_OPEN_API_SECRET_KYE}&type=json&numOfRows=100&pageNo=1`
     );
 
     if (response.status === 200) {
