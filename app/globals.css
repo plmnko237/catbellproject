@@ -321,11 +321,18 @@ h1 > a > img {
 /* 주유소 현황 게시물 */
 .message {
   display: none;
-}
-.stationList {
   width: 80%;
   margin: 0 auto;
+}
+.message + div {
+  width: 80%;
+  margin: 0 auto;
+  overflow: auto;
+}
+.stationList {
+  width: 100%;
   margin-top: 80px;
+
   overflow-y: auto;
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
@@ -699,12 +706,18 @@ h1 > a > img {
     margin-bottom: 50px;
   }
   /* 주유소 현황 */
+  .message + div {
+    width: 100%;
+    margin: 0 auto;
+    overflow: auto;
+  }
   .stationList {
     margin-top: 20px;
     overflow-x: scroll;
     width: 1000px;
   }
   .message {
+    width: 100%;
     margin-top: 50px;
     font-size: 14px;
     font-weight: 500;
