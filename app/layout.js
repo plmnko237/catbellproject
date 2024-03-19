@@ -4,7 +4,6 @@ import Link from "next/link";
 import { cardData } from "./data";
 import SearchBar from "./components/SearchBar";
 import MobileBtn from "./components/MobileBtn";
-import { Html, Head, Main, NextScript } from "next/document";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,18 +15,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   let data = cardData;
   return (
-    <Html lang="en">
-      <Head />
+    <html lang="en">
       <body className={inter.className}>
-        {/* <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              var script = document.createElement('script');
-              script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_JAVASCRIPT_KYE}&libraries=services&autoload=false';
-              document.body.appendChild(script);
-            `,
-          }}
-        /> */}
         <header>
           <div className="con">
             <h1>
@@ -51,8 +40,7 @@ export default function RootLayout({ children }) {
           </div>
         </header>
         {children}
-        {/* <NextScript /> */}
       </body>
-    </Html>
+    </html>
   );
 }
