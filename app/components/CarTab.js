@@ -28,13 +28,15 @@ export default function CarTab({ appKey, trafficAttributes }) {
     return <div>Loading...</div>;
   }
 
-  const trafficData = forecast.map((data) => {
-    const formattedData = Object.keys(data).map((key, index) => ({
-      title: trafficAttributes[index],
-      content: data[key],
-    }));
-    return formattedData;
-  });
+  const trafficData =
+    forecast &&
+    forecast.map((data) => {
+      const formattedData = Object.keys(data).map((key, index) => ({
+        title: trafficAttributes[index],
+        content: data[key],
+      }));
+      return formattedData;
+    });
 
   let today = forecast[0].sdate;
   today =

@@ -140,7 +140,7 @@ export default function BarChart({ traffic }) {
           }
         )}
       </div>
-      <canvas ref={chartRef} />
+      {chartRef ? <canvas ref={chartRef} /> : null}
     </div>
   );
 }

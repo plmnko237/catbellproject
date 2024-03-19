@@ -97,7 +97,7 @@ export default function Situation() {
               </tr>
             </thead>
             <tbody>
-              {data.map((station, index) => (
+              {data?.map((station, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{station.serviceAreaName || "알 수 없음"}</td>

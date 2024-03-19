@@ -9,12 +9,12 @@ export default function BarChart({ traffic }) {
 
   function filterDir(start = 21, end = -1) {
     const flattened = [].concat(...traffic);
-    const titles = flattened.map((item) => item.title);
-    const contents = flattened.map((item) => item.content);
+    const titles = flattened && flattened.map((item) => item.title);
+    const contents = flattened && flattened.map((item) => item.content);
 
     const slicedTitles = titles.slice(start, end);
     const slicedContents = contents.slice(start, end).map((time) => {
-      let [hour, minute] = time.split(":").map(Number);
+      let [hour, minute] = time && time.split(":").map(Number);
       return hour * 60 + minute;
     });
 

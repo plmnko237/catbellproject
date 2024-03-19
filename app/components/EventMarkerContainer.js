@@ -35,7 +35,7 @@ export default function EventMarkerContainer({ position, apikey }) {
       >
         <MapTypeControl position={"TOPRIGHT"} />
         <ZoomControl position={"RIGHT"} />
-        {positions.map((value, index) => (
+        {positions?.map((value, index) => (
           <MapMarker
             key={`EventMarkerContainer-${index}`}
             position={value.latlng}

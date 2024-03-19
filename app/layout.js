@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
             </h1>
             <nav id="gnb">
               <ul>
-                {data.map((_, i) => {
+                {data?.map((_, i) => {
                   return (
                     <li key={i}>
                       <Link href={data[i].url}>{data[i].title}</Link>

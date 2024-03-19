@@ -16,7 +16,7 @@ export default function MobileMenu({ data }) {
         </div>
         <nav id="m_gnb">
           <ul>
-            {data.map((_, i) => {
+            {data?.map((_, i) => {
               return (
                 <li key={i} onClick={() => setWidth("0")}>
                   <Link href={data[i].url}>{data[i].title}</Link>
