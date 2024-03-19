@@ -24,7 +24,7 @@ export const cardData = [
 //영업소 위치 fetchData
 let station = await locationInfo();
 
-export const positionData = station.map((a, i) => {
+export const positionData = station?.map((a, i) => {
   let [position] = [
     {
       title: station[i].unitName,
