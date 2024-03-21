@@ -1,12 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Situation() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [searchWord, setSearchWord] = useState("");
-  const router = useRouter();
 
   const fetchData = async (size, keyword) => {
     try {

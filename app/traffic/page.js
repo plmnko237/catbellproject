@@ -1,4 +1,3 @@
-import { forecastInfo } from "@/util/forecast";
 import CarTab from "../components/CarTab";
 import { trafficAttributes } from "../data";
 
