@@ -1,11 +1,10 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 import axios from "axios";
 
-export default function CarTab({ appKey, trafficAttributes }) {
+export default function CarTab({ trafficAttributes }) {
   let [tab, setTab] = useState(0);
   let [forecast, setForecast] = useState(null);
 

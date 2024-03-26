@@ -595,7 +595,7 @@ h1 > a > img {
   }
 }
 /* 모바일 */
-@media screen and (min-width: 562px) and (max-width: 767px) {
+@media screen and (min-width: 340px) and (max-width: 767px) {
   header {
     padding: 0 6vw;
   }
