@@ -1,6 +1,6 @@
 # CATBELL PROJECT
 
-## 📑 프로젝트 회고록 작성중
+## 📑 프로젝트 회고록
 
 - **노션** : https://zany-dish-c5c.notion.site/c62756ecb1b44500be60813f1cf1ab5c?pvs=4
 
