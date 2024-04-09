@@ -109,7 +109,6 @@ export default function BarChart({ traffic }) {
               className={index === 0 ? "active1" : "inactive1"}
               onClick={(e) => {
                 const parentElement = e.target.parentElement;
-
                 Array.from(parentElement.children).forEach((child) => {
                   if (child === e.target) {
                     child.className = "active1";
