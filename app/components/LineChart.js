@@ -5,10 +5,15 @@ import "chartjs-adapter-date-fns";
 
 export default function BarChart({ traffic }) {
   const chartRef = useRef(null);
+  //content가 "0:00"인 데이터 걸러내기
+  let filterTimeZeroData = traffic.map((item) =>
+    item.filter((obj) => obj.content !== "0:00")
+  );
   let myFilter = filterDir();
 
+  //버튼 눌렀을때 실행되는 방향별 필터링
   function filterDir(start = 21, end = -1) {
-    const flattened = [].concat(...traffic);
+    let flattened = [].concat(...filterTimeZeroData);
     const titles = flattened && flattened.map((item) => item.title);
     const contents = flattened && flattened.map((item) => item.content);
 
@@ -37,6 +42,7 @@ export default function BarChart({ traffic }) {
     }
   };
 
+  // 차트 보여주기
   useEffect(() => {
     if (chartRef.current) {
       if (chartRef.current.chart) {
@@ -98,6 +104,7 @@ export default function BarChart({ traffic }) {
       chartRef.current.chart = newChart;
     }
   }, []);
+
   return (
     <div className="chartArea">
       <h3>버스 고속도로 구간 별 소요시간</h3>
