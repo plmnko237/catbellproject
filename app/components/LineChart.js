@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import "chartjs-adapter-date-fns";
 
-export default function BarChart({ traffic }) {
+export default function LineChart({ traffic }) {
   const chartRef = useRef(null);
   //content가 "0:00"인 데이터 걸러내기
   let filterTimeZeroData = traffic.map((item) =>
@@ -61,9 +61,11 @@ export default function BarChart({ traffic }) {
 
       chart.data.labels = title;
       chart.data.datasets[0].data = content;
+      // 버튼 이름이 전체면 같은 방향끼리 배경색 적용
       if (direction == "전체") {
         chart.data.datasets[0].backgroundColor = backgroundColors;
         chart.data.datasets[0].borderColor = borderColors;
+        // 버튼 이름이 전체가 아니면 아래 배경색 각각 적용
       } else if (direction !== "전체") {
         chart.data.datasets[0].backgroundColor = buttonFilterColors;
         chart.data.datasets[0].borderColor = buttonFilterColors.map((color) =>

@@ -60,9 +60,11 @@ export default function BarChart({ traffic }) {
 
       chart.data.labels = title;
       chart.data.datasets[0].data = content;
+      // 버튼 이름이 전체면 같은 방향끼리 배경색 적용
       if (direction == "전체") {
         chart.data.datasets[0].backgroundColor = backgroundColors;
         chart.data.datasets[0].borderColor = borderColors;
+        // 버튼 이름이 전체가 아니면 아래 배경색 각각 적용
       } else if (direction !== "전체") {
         chart.data.datasets[0].backgroundColor = buttonFilterColors;
         chart.data.datasets[0].borderColor = buttonFilterColors.map((color) =>
