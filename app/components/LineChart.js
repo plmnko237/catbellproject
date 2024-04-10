@@ -10,6 +10,30 @@ export default function BarChart({ traffic }) {
     item.filter((obj) => obj.content !== "0:00")
   );
   let myFilter = filterDir();
+  const backgroundColors = []; //배경색
+  const borderColors = []; //테두리색
+  const buttonFilterColors = [
+    "rgba(255, 99, 132, 0.2)",
+    "rgba(255, 159, 64, 0.2)",
+    "rgba(255, 205, 86, 0.2)",
+    "rgba(75, 192, 192, 0.2)",
+    "rgba(54, 162, 235, 0.2)",
+    "rgba(153, 102, 255, 0.2)",
+    "rgba(201, 203, 207, 0.2)",
+  ];
+
+  // 구간별 색상 적용
+  myFilter.title.map((direction, idx) => {
+    let color;
+    if (idx >= 0 && idx < 6) {
+      color = "rgba(153, 102, 255, 0.2)";
+    } else {
+      color = "rgba(255, 159, 64, 0.2)";
+    }
+
+    backgroundColors.push(color);
+    borderColors.push(color.replace("0.2", "1"));
+  });
 
   //버튼 눌렀을때 실행되는 방향별 필터링
   function filterDir(start = 21, end = -1) {
@@ -29,7 +53,7 @@ export default function BarChart({ traffic }) {
     };
   }
 
-  const updateChart = (filteredData) => {
+  const updateChart = (direction, filteredData) => {
     const { title, content } = filteredData;
 
     if (chartRef.current) {
@@ -37,6 +61,15 @@ export default function BarChart({ traffic }) {
 
       chart.data.labels = title;
       chart.data.datasets[0].data = content;
+      if (direction == "전체") {
+        chart.data.datasets[0].backgroundColor = backgroundColors;
+        chart.data.datasets[0].borderColor = borderColors;
+      } else if (direction !== "전체") {
+        chart.data.datasets[0].backgroundColor = buttonFilterColors;
+        chart.data.datasets[0].borderColor = buttonFilterColors.map((color) =>
+          color.replace("0.2", "1")
+        );
+      }
 
       chart.update();
     }
@@ -58,26 +91,10 @@ export default function BarChart({ traffic }) {
           datasets: [
             {
               axis: "y",
-              label: "구간 별 소요 시간(분 단위)",
+              label: "",
               data: myFilter.content,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-                "rgba(255, 205, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(201, 203, 207, 0.2)",
-              ],
-              borderColor: [
-                "rgb(255, 99, 132)",
-                "rgb(255, 159, 64)",
-                "rgb(255, 205, 86)",
-                "rgb(75, 192, 192)",
-                "rgb(54, 162, 235)",
-                "rgb(153, 102, 255)",
-                "rgb(201, 203, 207)",
-              ],
+              backgroundColor: backgroundColors,
+              borderColor: borderColors,
               borderWidth: 1,
             },
           ],
@@ -98,6 +115,11 @@ export default function BarChart({ traffic }) {
               min: 0, // 최소값을 0으로 설정
             },
             y: { type: "category" },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
           },
         },
       });
@@ -126,13 +148,13 @@ export default function BarChart({ traffic }) {
 
                 if (a == "전체") {
                   const filteredData = filterDir();
-                  updateChart(filteredData);
+                  updateChart(a, filteredData);
                 } else if (a == "서울 ⇒ 지방방향") {
                   const filteredData = filterDir(21, 28);
-                  updateChart(filteredData);
+                  updateChart(a, filteredData);
                 } else {
                   const filteredData = filterDir(28);
-                  updateChart(filteredData);
+                  updateChart(a, filteredData);
                 }
               }}
             >

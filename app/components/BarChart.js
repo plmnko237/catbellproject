@@ -6,7 +6,34 @@ import "chartjs-adapter-date-fns";
 export default function BarChart({ traffic }) {
   const chartRef = useRef(null);
   let myFilter = filterDir();
+  const backgroundColors = []; //배경색
+  const borderColors = []; //테두리색
+  const buttonFilterColors = [
+    "rgba(255, 99, 132, 0.2)",
+    "rgba(255, 159, 64, 0.2)",
+    "rgba(255, 205, 86, 0.2)",
+    "rgba(75, 192, 192, 0.2)",
+    "rgba(54, 162, 235, 0.2)",
+    "rgba(153, 102, 255, 0.2)",
+    "rgba(201, 203, 207, 0.2)",
+  ];
 
+  // 구간별 색상 적용
+  myFilter.title.map((direction, idx) => {
+    let color;
+    if (idx >= 0 && idx < 7) {
+      color = "rgba(255, 99, 132, 0.2)";
+    } else if (idx >= 7 && idx < 14) {
+      color = "rgba(255, 205, 86, 0.2)";
+    } else {
+      color = "rgba(75, 192, 192, 0.2)";
+    }
+
+    backgroundColors.push(color);
+    borderColors.push(color.replace("0.2", "1"));
+  });
+
+  //traffic데이터 title, 시간정보 가공
   function filterDir(start = 5, end = 21) {
     const flattened = [].concat(...traffic);
     const titles = flattened.map((item) => item.title);
@@ -24,7 +51,8 @@ export default function BarChart({ traffic }) {
     };
   }
 
-  const updateChart = (filteredData) => {
+  //버튼 클릭 시 구간별로 필터링되는 함수
+  const updateChart = (direction, filteredData) => {
     const { title, content } = filteredData;
 
     if (chartRef.current) {
@@ -32,7 +60,15 @@ export default function BarChart({ traffic }) {
 
       chart.data.labels = title;
       chart.data.datasets[0].data = content;
-
+      if (direction == "전체") {
+        chart.data.datasets[0].backgroundColor = backgroundColors;
+        chart.data.datasets[0].borderColor = borderColors;
+      } else if (direction !== "전체") {
+        chart.data.datasets[0].backgroundColor = buttonFilterColors;
+        chart.data.datasets[0].borderColor = buttonFilterColors.map((color) =>
+          color.replace("0.2", "1")
+        );
+      }
       chart.update();
     }
   };
@@ -52,26 +88,10 @@ export default function BarChart({ traffic }) {
           datasets: [
             {
               axis: "y",
-              label: "구간 별 소요 시간(분 단위)",
+              label: "",
               data: myFilter.content,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-                "rgba(255, 205, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(201, 203, 207, 0.2)",
-              ],
-              borderColor: [
-                "rgb(255, 99, 132)",
-                "rgb(255, 159, 64)",
-                "rgb(255, 205, 86)",
-                "rgb(75, 192, 192)",
-                "rgb(54, 162, 235)",
-                "rgb(153, 102, 255)",
-                "rgb(201, 203, 207)",
-              ],
+              backgroundColor: backgroundColors,
+              borderColor: borderColors,
               borderWidth: 1,
             },
           ],
@@ -93,11 +113,17 @@ export default function BarChart({ traffic }) {
             },
             y: { type: "category" },
           },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
         },
       });
       chartRef.current.chart = newChart;
     }
   }, []);
+
   return (
     <div className="chartArea">
       <h3>자동차 고속도로 구간 별 소요시간</h3>
@@ -121,16 +147,16 @@ export default function BarChart({ traffic }) {
 
                   if (a == "전체") {
                     const filteredData = filterDir();
-                    updateChart(filteredData);
+                    updateChart(a, filteredData);
                   } else if (a == "서울 ⇒ 지방방향") {
                     const filteredData = filterDir(5, 12);
-                    updateChart(filteredData);
+                    updateChart(a, filteredData);
                   } else if (a == "지방 ⇒ 서울방향") {
                     const filteredData = filterDir(12, 19);
-                    updateChart(filteredData);
+                    updateChart(a, filteredData);
                   } else {
                     const filteredData = filterDir(19);
-                    updateChart(filteredData);
+                    updateChart(a, filteredData);
                   }
                 }}
               >
