@@ -145,15 +145,15 @@ CATBELL 주유소는 한국 도로교통 공사의 공공데이터를 이용해 
 
    방향 별 필터링 버튼을 누르면 각각 도착지가 다른 점을 고려하여 각각 다른 배경색을 적용하여 사용자의 편의를 높이기 위해 노력하였습니다.
 
-```
+   ```
    //버튼 클릭 시 구간별로 필터링되는 함수
    const updateChart = (direction, filteredData) => {
    const { title, content } = filteredData;
 
    if (chartRef.current) {
-     const chart = chartRef.current.chart;
-     chart.data.labels = title;
-     chart.data.datasets[0].data = content;
+       const chart = chartRef.current.chart;
+       chart.data.labels = title;
+       chart.data.datasets[0].data = content;
 
    // 버튼 이름이 전체면 같은 방향끼리 배경색 적용
    if (direction == "전체") {
@@ -161,14 +161,14 @@ CATBELL 주유소는 한국 도로교통 공사의 공공데이터를 이용해 
       chart.data.datasets[0].borderColor = borderColors;
    // 버튼 이름이 전체가 아니면 아래 배경색 각각 적용
    } else if (direction !== "전체") {
-      chart.data.datasets[0].backgroundColor = buttonFilterColors;
-      chart.data.datasets[0].borderColor = buttonFilterColors.map((color) =>
-        color.replace("0.2", "1")
-      );
+       chart.data.datasets[0].backgroundColor = buttonFilterColors;
+       chart.data.datasets[0].borderColor = buttonFilterColors.map((color) =>
+           color.replace("0.2", "1")
+       );
    }
    chart.update();
    }
-```
+   ```
 
 <br/><br/>
 
